@@ -24,7 +24,7 @@ jobs:
         run: npm install
 
       - name: Build Project
-        run: npm run build
+        run: npm run open-build
 
       - name: Deploy to Production (if main branch)
         if: github.ref == 'refs/heads/main'
@@ -42,4 +42,4 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           # This command specifically deploys to the "uat" environment
-          command: deploy --env uat```
+          command: deploy --env uat
