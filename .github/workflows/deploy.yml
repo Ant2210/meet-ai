@@ -33,7 +33,7 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           # This command deploys to "meet-ai-production" by default
-          command: deploy
+          command: npm run deploy
 
       - name: Deploy to UAT (if uat branch)
         if: github.ref == 'refs/heads/uat'
@@ -42,4 +42,4 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           # This command specifically deploys to the "uat" environment
-          command: deploy --env uat
+          command: npm run deploy --env uat
