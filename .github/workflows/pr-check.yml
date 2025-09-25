@@ -11,6 +11,9 @@ on:
 jobs:
   test-and-lint:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      deployments: write
     steps:
       # This first step checks if the PR is from uat to main.
       # It sets an output variable that the following steps will use.
