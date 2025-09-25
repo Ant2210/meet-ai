@@ -8,13 +8,10 @@
  */
 {
 	"$schema": "node_modules/wrangler/config-schema.json",
-	"name": "meet-ai",
+	"name": "meet-ai-production",
 	"main": ".open-next/worker.js",
 	"compatibility_date": "2025-04-01",
-	"compatibility_flags": [
-		"nodejs_compat",
-		"global_fetch_strictly_public"
-	],
+	"compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
 	"assets": {
 		"binding": "ASSETS",
 		"directory": ".open-next/assets"
@@ -52,5 +49,14 @@
 	 * https://developers.cloudflare.com/workers/wrangler/configuration/#service-bindings
 	 */
 	// "services": [{ "binding": "MY_SERVICE", "service": "my-service" }]
-	"upload_source_maps": true
+	"upload_source_maps": true,
+
+	// --- UAT Environment Definition ---
+	// This "env" block tells Wrangler about your other deployments.
+	"env": {
+		"uat": {
+			// This is the unique name for your UAT service on Cloudflare.
+			"name": "meet-ai-uat"
+		}
+	}
 }
