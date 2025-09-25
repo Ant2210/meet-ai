@@ -19,6 +19,16 @@
 	"observability": {
 		"enabled": true
 	},
+
+	// Production DB binding (default deploy)
+	"d1_databases": [
+		{
+			"binding": "DB",
+			"database_name": "meet-ai-prod",
+			"database_id": "ca4a0e69-1140-478e-82f5-7e588b202b45",
+			"migrations_dir": "drizzle"
+		}
+	],
 	/**
 	 * Smart Placement
 	 * Docs: https://developers.cloudflare.com/workers/configuration/smart-placement/#smart-placement
@@ -56,7 +66,15 @@
 	"env": {
 		"uat": {
 			// This is the unique name for your UAT service on Cloudflare.
-			"name": "meet-ai-uat"
+			"name": "meet-ai-uat",
+			"d1_databases": [
+				{
+					"binding": "DB",
+					"database_name": "meet-ai-uat",
+					"database_id": "9ddfa4c9-86d8-4f7e-ae27-0aef0bb2a38c",
+					"migrations_dir": "drizzle"
+				}
+			]
 		}
 	}
 }
