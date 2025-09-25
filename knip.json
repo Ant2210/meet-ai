@@ -1,0 +1,5 @@
+{
+	"$schema": "https://unpkg.com/knip/schema.json",
+	"ignore": ["open-next.config.ts"],
+	"ignoreDependencies": ["eslint", "eslint-config-next", "tailwindcss"]
+}
