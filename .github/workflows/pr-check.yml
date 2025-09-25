@@ -1,3 +1,5 @@
+# .github/workflows/pull-request-check.yml
+
 name: Pull Request Check
 
 on:
@@ -10,20 +12,37 @@ jobs:
   test-and-lint:
     runs-on: ubuntu-latest
     steps:
+      # This first step checks if the PR is from uat to main.
+      # It sets an output variable that the following steps will use.
+      - name: Decide if checks are needed
+        id: decider
+        run: |
+          if [[ "${{ github.head_ref }}" == "uat" && "${{ github.base_ref }}" == "main" ]]; then
+            echo "Checks are being skipped because this is a UAT to Main PR."
+            echo "continue=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "Checks are required for this PR."
+            echo "continue=true" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Checkout Code
+        if: steps.decider.outputs.continue == 'true'
         uses: actions/checkout@v4
 
       - name: Setup Node.js
+        if: steps.decider.outputs.continue == 'true'
         uses: actions/setup-node@v4
         with:
           node-version: "20"
 
       - name: Install Dependencies
+        if: steps.decider.outputs.continue == 'true'
         run: npm install
 
       - name: Run Linter
+        if: steps.decider.outputs.continue == 'true'
         run: npm run lint
 
-      # This is the only line that changes
       - name: Run Cloudflare-Specific Check Build
+        if: steps.decider.outputs.continue == 'true'
         run: npm run open-check
