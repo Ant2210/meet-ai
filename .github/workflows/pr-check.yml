@@ -14,6 +14,8 @@ jobs:
     permissions:
       contents: read
       deployments: write
+    env:
+      DRIZZLE_TARGET: uat
     steps:
       # This first step checks if the PR is from uat to main.
       # It sets an output variable that the following steps will use.
