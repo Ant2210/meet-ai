@@ -26,7 +26,20 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
-      - name: Build Project
+      - name: Build Project for Production
+        if: github.ref == 'refs/heads/main'
+        env:
+          DRIZZLE_TARGET: prod
+          DATABASE_URL_PROD: ${{ secrets.DATABASE_URL_PROD }}
+          BETTER_AUTH_SECRET: ${{ secrets.BETTER_AUTH_SECRET }}
+        run: npm run open-build
+
+      - name: Build Project for UAT
+        if: github.ref == 'refs/heads/uat'
+        env:
+          DRIZZLE_TARGET: uat
+          DATABASE_URL_UAT: ${{ secrets.DATABASE_URL_UAT }}
+          BETTER_AUTH_SECRET: ${{ secrets.BETTER_AUTH_SECRET }}
         run: npm run open-build
 
       - name: Deploy to Production (if main branch)
