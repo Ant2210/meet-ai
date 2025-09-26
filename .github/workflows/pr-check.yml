@@ -18,7 +18,6 @@ jobs:
       DRIZZLE_TARGET: uat
       DATABASE_URL_UAT: ${{ secrets.DATABASE_URL_UAT }}
       BETTER_AUTH_SECRET: ${{ secrets.BETTER_AUTH_SECRET }}
-      BETTER_AUTH_URL: "https://example.com"
     steps:
       # This first step checks if the PR is from uat to main.
       # It sets an output variable that the following steps will use.
