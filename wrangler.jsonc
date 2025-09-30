@@ -37,6 +37,7 @@
   // "vars": { "MY_VARIABLE": "production_value" }
   "vars": {
     "DRIZZLE_TARGET": "prod",
+    "BASE_URL": "https://meet-ai-production.anthony-4e7.workers.dev",
   },
   /**
    * Note: Use secrets to store sensitive data.
@@ -62,6 +63,7 @@
       "name": "meet-ai-uat",
       "vars": {
         "DRIZZLE_TARGET": "uat",
+        "BASE_URL": "https://meet-ai-uat.anthony-4e7.workers.dev",
       },
     },
   },
