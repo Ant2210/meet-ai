@@ -1,36 +1,16 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { useQuery } from "@tanstack/react-query";
 
-import { Button } from "@/components/ui/button";
-import { authClient } from "@/lib/auth-client";
-import { AuthenticatedSession } from "@/types/session";
+import { useTRPC } from "@/trpc/client";
 
-interface HomeViewProps {
-  session: AuthenticatedSession;
-}
-
-export const HomeView = ({ session }: HomeViewProps) => {
-  const router = useRouter();
+export const HomeView = () => {
+  const trpc = useTRPC();
+  const { data } = useQuery(trpc.hello.queryOptions({ text: "Ant" }));
 
   return (
     <div className="w-96 mx-auto mt-8 flex flex-col gap-4">
-      <p>
-        Logged in as <span className="capitalize">{session.user.name}</span>
-      </p>
-      <Button
-        onClick={() =>
-          authClient.signOut({
-            fetchOptions: {
-              onSuccess: () => {
-                router.push("/sign-in");
-              },
-            },
-          })
-        }
-      >
-        Sign out
-      </Button>
+      <span className="capitalize text-4xl">{data?.greeting}</span>
     </div>
   );
 };
