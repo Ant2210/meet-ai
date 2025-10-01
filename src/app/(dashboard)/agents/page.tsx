@@ -5,9 +5,8 @@ import { ErrorBoundary } from "react-error-boundary";
 import {
   AgentsView,
   AgentsViewError,
-  // AgentsViewError,
   AgentsViewLoading,
-} from "@/modules/agents/ui/views/agents.-view";
+} from "@/modules/agents/ui/views/agents-view";
 import { getQueryClient, trpc } from "@/trpc/server";
 
 const AgentsPage = async () => {
