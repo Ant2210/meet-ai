@@ -2,7 +2,7 @@ import "dotenv/config";
 
 import { defineConfig } from "drizzle-kit";
 
-import { resolveDbEnv } from "@/db/resolve-db-env";
+import { resolveDbEnv } from "./src/db/resolve-db-env";
 
 const { url } = resolveDbEnv();
 
