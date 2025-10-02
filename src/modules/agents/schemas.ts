@@ -1,6 +1,3 @@
-// import { z } from "zod";
-
-// export const agentsInsertSchema = z.object({
 import { z } from "zod";
 
 export const agentsInsertSchema = z.object({
