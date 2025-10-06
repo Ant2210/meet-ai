@@ -1,7 +1,9 @@
+import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
+import { useDebouncedCallback } from "use-debounce";
 import z from "zod";
 
 import { GeneratedAvatar } from "@/components/generated-avatar";
@@ -16,7 +18,6 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { useDebounce } from "@/hooks/use-debounce";
 import { useTRPC } from "@/trpc/client";
 import { agentsInsertSchema } from "../../schemas";
 import { AgentGetOne } from "../../types";
@@ -34,11 +35,14 @@ export const AgentForm = ({
 }: AgentFormProps) => {
   const trpc = useTRPC();
   const queryClient = useQueryClient();
+  const [debouncedName, setDebouncedName] = useState(initialValues?.name ?? "");
 
   const createAgent = useMutation(
     trpc.agents.create.mutationOptions({
       onSuccess: async () => {
-        await queryClient.invalidateQueries(trpc.agents.getMany.queryOptions());
+        await queryClient.invalidateQueries(
+          trpc.agents.getMany.queryOptions({}),
+        );
 
         if (initialValues?.id) {
           await queryClient.invalidateQueries(
@@ -61,6 +65,10 @@ export const AgentForm = ({
     },
   });
 
+  const debouncedNameChange = useDebouncedCallback((value: string) => {
+    setDebouncedName(value);
+  }, 500);
+
   const isEdit = !!initialValues?.id;
   const isPending = createAgent.isPending;
 
@@ -71,8 +79,6 @@ export const AgentForm = ({
       createAgent.mutate(values);
     }
   };
-
-  const debouncedName = useDebounce(form.watch("name"), 300);
 
   return (
     <Form {...form}>
@@ -89,7 +95,14 @@ export const AgentForm = ({
             <FormItem>
               <FormLabel>Name</FormLabel>
               <FormControl>
-                <Input {...field} placeholder="e.g. Math tutor" />
+                <Input
+                  {...field}
+                  onChange={(e) => {
+                    field.onChange(e);
+                    debouncedNameChange(e.target.value);
+                  }}
+                  placeholder="e.g. Math tutor"
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
