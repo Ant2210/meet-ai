@@ -3,6 +3,7 @@ import { SearchIcon } from "lucide-react";
 import { useDebouncedCallback } from "use-debounce";
 
 import { Input } from "@/components/ui/input";
+import { DEFAULT_PAGE } from "@/constants";
 import { useAgentsFilters } from "../../hooks/use-agents-filters";
 
 export const AgentsSearchFilters = () => {
@@ -10,7 +11,7 @@ export const AgentsSearchFilters = () => {
   const [search, setSearch] = useState(filters.search ?? "");
 
   const debouncedUpdate = useDebouncedCallback((value: string) => {
-    setFilters({ search: value });
+    setFilters({ search: value, page: DEFAULT_PAGE });
   }, 500);
 
   useEffect(() => {
@@ -30,7 +31,7 @@ export const AgentsSearchFilters = () => {
         onKeyDown={(e) => {
           if (e.key === "Enter") {
             debouncedUpdate.cancel();
-            setFilters({ search });
+            setFilters({ search, page: DEFAULT_PAGE });
           }
         }}
       />
