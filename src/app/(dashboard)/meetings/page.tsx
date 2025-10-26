@@ -2,6 +2,7 @@ import { Suspense } from "react";
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 import { ErrorBoundary } from "react-error-boundary";
 
+import { redirectIfNotAuthenticated } from "@/lib/auth-utils";
 import {
   MeetingsView,
   MeetingsViewError,
@@ -9,7 +10,9 @@ import {
 } from "@/modules/meetings/ui/views/meetings-view";
 import { getQueryClient, trpc } from "@/trpc/server";
 
-const MeetingsPage = () => {
+const MeetingsPage = async () => {
+  await redirectIfNotAuthenticated();
+
   const queryClient = getQueryClient();
 
   void queryClient.prefetchQuery(trpc.meetings.getMany.queryOptions({}));
