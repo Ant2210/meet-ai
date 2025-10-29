@@ -14,7 +14,7 @@ import { LoadingState } from "@/components/loading-state";
 import { useTRPC } from "@/trpc/client";
 import { useConfirm } from "../../hooks/use-confirm";
 import { MeetingIdViewHeader } from "../components/meeting-id-view-header";
-import { UpdateMeetingDialog } from "../components/update-meeting-dialog copy";
+import { UpdateMeetingDialog } from "../components/update-meeting-dialog";
 
 interface MeetingIdViewProps {
   meetingId: string;
