@@ -80,7 +80,7 @@ export const columns: ColumnDef<MeetingGetMany[number]>[] = [
           variant="outline"
           className={cn(
             "capitalize [&>svg]:size-4 text-muted-foreground",
-            statusIconMap[row.original.status as keyof typeof statusColorMap],
+            statusColorMap[row.original.status as keyof typeof statusColorMap],
           )}
         >
           <Icon
