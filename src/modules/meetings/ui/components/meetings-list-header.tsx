@@ -9,7 +9,7 @@ import { DEFAULT_PAGE } from "@/constants";
 import { useMeetingsFilters } from "../../hooks/use-agents-filters";
 import { MeetingsAgentFilter } from "./meetings-agent-filter";
 import { MeetingsSearchFilters } from "./meetings-search-filter";
-import { MeetingsStatusFilter } from "./meetings-status-fitler";
+import { MeetingsStatusFilter } from "./meetings-status-filter";
 import { NewMeetingDialog } from "./new-meeting-dialog";
 
 export const MeetingsListHeader = () => {
