@@ -30,16 +30,32 @@ jobs:
         if: github.ref == 'refs/heads/main'
         env:
           DRIZZLE_TARGET: prod
+          NODE_ENV: production
           DATABASE_URL_PROD: ${{ secrets.DATABASE_URL_PROD }}
           BETTER_AUTH_SECRET: ${{ secrets.BETTER_AUTH_SECRET }}
+          BETTER_AUTH_URL_PROD: ${{ secrets.BETTER_AUTH_URL_PROD }}
+          GITHUB_CLIENT_ID: ${{ secrets.GITHUB_CLIENT_ID }}
+          GITHUB_CLIENT_SECRET: ${{ secrets.GITHUB_CLIENT_SECRET }}
+          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+          NEXT_PUBLIC_STREAM_VIDEO_API_KEY: ${{ secrets.NEXT_PUBLIC_STREAM_VIDEO_API_KEY }}
+          STREAM_VIDEO_SECRET_KEY: ${{ secrets.STREAM_VIDEO_SECRET_KEY }}
         run: npm run open-build
 
       - name: Build Project for UAT
         if: github.ref == 'refs/heads/uat'
         env:
           DRIZZLE_TARGET: uat
+          NODE_ENV: production
           DATABASE_URL_UAT: ${{ secrets.DATABASE_URL_UAT }}
           BETTER_AUTH_SECRET: ${{ secrets.BETTER_AUTH_SECRET }}
+          BETTER_AUTH_URL_UAT: ${{ secrets.BETTER_AUTH_URL_UAT }}
+          GITHUB_CLIENT_ID: ${{ secrets.GITHUB_CLIENT_ID }}
+          GITHUB_CLIENT_SECRET: ${{ secrets.GITHUB_CLIENT_SECRET }}
+          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+          NEXT_PUBLIC_STREAM_VIDEO_API_KEY: ${{ secrets.NEXT_PUBLIC_STREAM_VIDEO_API_KEY }}
+          STREAM_VIDEO_SECRET_KEY: ${{ secrets.STREAM_VIDEO_SECRET_KEY }}
         run: npm run open-build
 
       - name: Deploy to Production (if main branch)
@@ -48,7 +64,6 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          # This command deploys to "meet-ai-production" by default
           command: deploy
 
       - name: Deploy to UAT (if uat branch)
@@ -57,5 +72,4 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          # This command specifically deploys to the "uat" environment
           command: deploy --env uat

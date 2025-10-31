@@ -158,7 +158,7 @@ export const SignInView = () => {
                     className="w-full"
                     aria-label="Continue with Google"
                   >
-                    <FaGoogle aria-hidden="true" />
+                    <FaGoogle />
                   </Button>
                   <Button
                     disabled={pending}
@@ -168,7 +168,7 @@ export const SignInView = () => {
                     className="w-full"
                     aria-label="Continue with GitHub"
                   >
-                    <FaGithub aria-hidden="true" />
+                    <FaGithub />
                   </Button>
                 </div>
                 <div className="text-center text-sm">
@@ -183,7 +183,7 @@ export const SignInView = () => {
               </div>
             </form>
           </Form>
-          <div className="bg-radial from-green-700 to-green-900 relative hidden md:flex flex-col items-center justify-center">
+          <div className="bg-radial from-sidebar-accent to-sidebar relative hidden md:flex flex-col items-center justify-center">
             <img
               src="/logo.svg"
               alt="Image"

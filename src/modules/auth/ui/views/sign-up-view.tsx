@@ -206,7 +206,7 @@ export const SignUpView = () => {
                     className="w-full"
                     aria-label="Continue with Google"
                   >
-                    <FaGoogle aria-hidden="true" />
+                    <FaGoogle />
                     <span className="sr-only">Continue with Google</span>
                   </Button>
                   <Button
@@ -217,7 +217,7 @@ export const SignUpView = () => {
                     className="w-full"
                     aria-label="Continue with GitHub"
                   >
-                    <FaGithub aria-hidden="true" />
+                    <FaGithub />
                     <span className="sr-only">Continue with GitHub</span>
                   </Button>
                 </div>
@@ -233,7 +233,7 @@ export const SignUpView = () => {
               </div>
             </form>
           </Form>
-          <div className="bg-radial from-green-700 to-green-900 relative hidden md:flex flex-col items-center justify-center">
+          <div className="bg-radial from-sidebar-accent to-sidebar relative hidden md:flex flex-col items-center justify-center">
             <img
               src="/logo.svg"
               alt="Image"
