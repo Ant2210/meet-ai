@@ -32,19 +32,26 @@ jobs:
         if: steps.decider.outputs.continue == 'true'
         uses: actions/checkout@v4
 
+      - name: Setup pnpm
+        if: steps.decider.outputs.continue == 'true'
+        uses: pnpm/action-setup@v3
+        with:
+          version: 9
+
       - name: Setup Node.js
         if: steps.decider.outputs.continue == 'true'
         uses: actions/setup-node@v4
         with:
           node-version: "20"
+          cache: "pnpm"
 
       - name: Install Dependencies
         if: steps.decider.outputs.continue == 'true'
-        run: npm ci
+        run: pnpm install --frozen-lockfile
 
       - name: Run Linter
         if: steps.decider.outputs.continue == 'true'
-        run: npm run lint
+        run: pnpm run lint
 
       - name: Run Cloudflare-Specific Check Build
         if: steps.decider.outputs.continue == 'true'
@@ -60,4 +67,4 @@ jobs:
           GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
           NEXT_PUBLIC_STREAM_VIDEO_API_KEY: ${{ secrets.NEXT_PUBLIC_STREAM_VIDEO_API_KEY }}
           STREAM_VIDEO_SECRET_KEY: ${{ secrets.STREAM_VIDEO_SECRET_KEY }}
-        run: npm run open-check
+        run: pnpm run open-check
