@@ -11,12 +11,7 @@ on:
 jobs:
   test-and-lint:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      deployments: write
     steps:
-      # This first step checks if the PR is from uat to main.
-      # It sets an output variable that the following steps will use.
       - name: Decide if checks are needed
         id: decider
         run: |
@@ -46,18 +41,15 @@ jobs:
         if: steps.decider.outputs.continue == 'true'
         run: npm run lint
 
-      - name: Run Cloudflare-Specific Check Build
+      - name: Run Type Check
         if: steps.decider.outputs.continue == 'true'
+        run: npm run check
         env:
           DRIZZLE_TARGET: uat
           NODE_ENV: production
           DATABASE_URL_UAT: ${{ secrets.DATABASE_URL_UAT }}
           BETTER_AUTH_SECRET: ${{ secrets.BETTER_AUTH_SECRET }}
           BETTER_AUTH_URL_UAT: ${{ secrets.BETTER_AUTH_URL_UAT }}
-          GITHUB_CLIENT_ID: ${{ secrets.GITHUB_CLIENT_ID }}
-          GITHUB_CLIENT_SECRET: ${{ secrets.GITHUB_CLIENT_SECRET }}
-          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
-          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
           NEXT_PUBLIC_STREAM_VIDEO_API_KEY: ${{ secrets.NEXT_PUBLIC_STREAM_VIDEO_API_KEY }}
           STREAM_VIDEO_SECRET_KEY: ${{ secrets.STREAM_VIDEO_SECRET_KEY }}
-        run: npm run open-check
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
