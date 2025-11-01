@@ -14,7 +14,7 @@
   "compatibility_flags": [
     "nodejs_compat",
     "global_fetch_strictly_public",
-    "enable_nodejs_http_modules",
+    "enable_nodejs_http_modules"
   ],
   "assets": {
     "binding": "ASSETS",
