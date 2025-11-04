@@ -212,7 +212,7 @@ export async function POST(req: NextRequest) {
       .where(eq(agents.id, existingMeeting.agentId));
 
     if (!existingAgent) {
-      return NextResponse.json({ error: "Meeting not found" }, { status: 404 });
+      return NextResponse.json({ error: "Agent not found" }, { status: 404 });
     }
 
     if (userId !== existingAgent.id) {
