@@ -25,7 +25,7 @@ export const Transcript = ({ meetingId }: TranscriptProps) => {
     item.text
       .toString()
       .toLowerCase()
-      .includes(searchQuery.toLocaleLowerCase()),
+      .includes(searchQuery.toLowerCase()),
   );
 
   return (
