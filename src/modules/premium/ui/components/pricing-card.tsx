@@ -12,9 +12,9 @@ const pricingCardVariants = cva("rounded-lg p-4 py-6 w-full", {
       default: "bg-white text-black",
       highlighted: "bg-linear-to-br from-[#093C23] to-[#051B16] text-white",
     },
-    defaultVariants: {
-      variant: "default",
-    },
+  },
+  defaultVariants: {
+    variant: "default",
   },
 });
 
@@ -24,9 +24,9 @@ const pricingCardIconVariants = cva("size-5", {
       default: "fill-primary text-white",
       highlighted: "fill-white text-black",
     },
-    defaultVariants: {
-      variant: "default",
-    },
+  },
+  defaultVariants: {
+    variant: "default",
   },
 });
 
@@ -45,9 +45,9 @@ const pricingCardBadgeVariants = cva("text-black text-xs font-normal p-1", {
       default: "bg-primary/20",
       highlighted: "bg-[#F5B797]",
     },
-    defaultVariants: {
-      variant: "default",
-    },
+  },
+  defaultVariants: {
+    variant: "default",
   },
 });
 
