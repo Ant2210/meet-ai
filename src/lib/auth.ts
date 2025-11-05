@@ -1,8 +1,10 @@
+import { checkout, polar, portal } from "@polar-sh/better-auth";
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 
 import { db } from "@/db";
 import * as schema from "@/db/schema";
+import { polarClient } from "./polar";
 
 const isDev = process.env.NODE_ENV === "development";
 
@@ -37,6 +39,20 @@ export const auth = betterAuth({
     expiresIn: 60 * 60 * 24 * 7, // 7 days
     updateAge: 60 * 60 * 24, // Update every 24 hours
   },
+
+  plugins: [
+    polar({
+      client: polarClient,
+      createCustomerOnSignUp: true,
+      use: [
+        checkout({
+          authenticatedUsersOnly: true,
+          successUrl: "/upgrade",
+        }),
+        portal(),
+      ],
+    }),
+  ],
 
   emailAndPassword: {
     enabled: true,
