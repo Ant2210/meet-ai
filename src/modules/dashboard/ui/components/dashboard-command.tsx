@@ -86,7 +86,7 @@ export const DashboardCommand = ({ open, setOpen }: DashboardCommandProps) => {
                 variant="botttsNeutral"
                 className="size-5"
               />
-              <span className="">{agent.name}</span>
+              <span>{agent.name}</span>
             </CommandItem>
           ))}
         </CommandGroup>
